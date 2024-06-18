@@ -1,0 +1,14 @@
+{
+  "name": "api_accounts_manager",
+  "version": "1.0.0",
+  "description": "API for accounts manager website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aryan Ray",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
