@@ -3,13 +3,23 @@ const Task = require("./../models/taskModel");
 
 exports.getAllAccounts = async (req, res) => {
     try {
-        const allAccounts = await Account.find();
+        const accounts = await Account.find();
+
+        // Create a copy of accounts to populate tasks manually
+        const accountsWithTasks = await Promise.all(
+            accounts.map(async (account) => {
+                // Fetch tasks for the current account
+                const tasks = await Task.find({ _id: { $in: account.tasks } });
+                // Return a new object with tasks populated
+                return { ...account.toObject(), tasks };
+            })
+        );
 
         res.status(201).json({
             status: "success",
-            results: allAccounts.length,
+            results: accounts.length,
             data: {
-                allAccounts,
+                accountsWithTasks,
             },
         });
     } catch (err) {
