@@ -93,6 +93,12 @@ exports.updateAccount = async (req, res) => {
 
 exports.deleteAccount = async (req, res) => {
     try {
+        account = await Account.findById(req.params.id);
+
+        await Promise.all(
+            account.tasks.map((task) => Task.findByIdAndDelete(task))
+        );
+
         await Account.findByIdAndDelete(req.params.id);
 
         res.status(204).json({
