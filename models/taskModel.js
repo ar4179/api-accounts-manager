@@ -6,7 +6,7 @@ const taskSchema = new mongoose.Schema({
         required: [true, "An account must have a title"],
     },
     description: {
-        type: Array,
+        type: String,
         required: [true, "An account must have a description field"],
     },
     priority: {
@@ -16,7 +16,7 @@ const taskSchema = new mongoose.Schema({
     percentComplete: {
         type: Number,
         required: [true, "An account must have a percentComplete field"],
-    }
+    },
 });
 
 const Task = mongoose.model("Task", taskSchema);

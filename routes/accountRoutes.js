@@ -9,6 +9,7 @@ router
 
 router
     .route("/:id")
+    .get(accountController.getAccount)
     .patch(accountController.updateAccount)
     .delete(accountController.deleteAccount); // delete tasks associated with the account as well
 

@@ -30,6 +30,24 @@ exports.getAllAccounts = async (req, res) => {
     }
 };
 
+exports.getAccount = async (req, res) => {
+    try {
+        const account = await Account.findById(req.params.id);
+
+        res.status(201).json({
+            status: "success",
+            data: {
+                account,
+            },
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            message: err,
+        });
+    }
+};
+
 exports.createAccount = async (req, res) => {
     try {
         const newAccount = await Account.create(req.body);
