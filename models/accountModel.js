@@ -7,7 +7,7 @@ const accountSchema = new mongoose.Schema({
         unique: true,
     },
     tasks: {
-        type: Array,
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
         required: [true, "An account must have a task array"],
     },
 });
