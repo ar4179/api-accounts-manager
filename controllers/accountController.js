@@ -10,8 +10,17 @@ exports.getAllAccounts = async (req, res) => {
             accounts.map(async (account) => {
                 // Fetch tasks for the current account
                 const tasks = await Task.find({ _id: { $in: account.tasks } });
+
+                // Sort tasks by priority: high, normal, low
+                const sortedTasks = tasks.sort((a, b) => {
+                    const priorityOrder = { high: 1, normal: 2, low: 3 };
+                    return (
+                        priorityOrder[a.priority] - priorityOrder[b.priority]
+                    );
+                });
+
                 // Return a new object with tasks populated
-                return { ...account.toObject(), tasks };
+                return { ...account.toObject(), tasks: sortedTasks };
             })
         );
 
