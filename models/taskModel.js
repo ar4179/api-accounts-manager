@@ -7,7 +7,7 @@ const taskSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: [true, "An account must have a description field"],
+        required: isThisString,
     },
     priority: {
         type: String,
@@ -18,6 +18,10 @@ const taskSchema = new mongoose.Schema({
         required: [true, "An account must have a percentComplete field"],
     },
 });
+
+function isThisString() {
+    return typeof this.description === "string" ? false : true;
+}
 
 taskSchema.pre("remove", async function (next) {
     try {
