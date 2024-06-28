@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const compression = require("compression");
 
 const accountRouter = require("./routes/accountRoutes");
 const taskRouter = require("./routes/taskRoutes");
@@ -34,6 +35,8 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+app.use(compression());
 
 app.use("/api/v1/accounts", accountRouter);
 app.use("/api/v1/tasks", taskRouter);
