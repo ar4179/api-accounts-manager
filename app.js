@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 
+/*
 // ROUTE MIDDLEWARES
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
@@ -35,6 +36,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+*/
 
 app.use(compression());
 
