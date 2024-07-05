@@ -17,6 +17,10 @@ const taskSchema = new mongoose.Schema({
         type: Number,
         required: [true, "An account must have a percentComplete field"],
     },
+    archived: {
+        type: Boolean,
+        required: [true, "An account must have an archived field"],
+    },
 });
 
 function isThisString() {
