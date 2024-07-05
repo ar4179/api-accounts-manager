@@ -11,13 +11,23 @@ exports.getAllAccounts = async (req, res) => {
                 // Fetch tasks for the current account
                 const tasks = await Task.find({ _id: { $in: account.tasks } });
 
-                // Sort tasks by priority: high, normal, low
-                const sortedTasks = tasks.sort((a, b) => {
+                // Separate tasks into two arrays: archived and non-archived
+                const nonArchivedTasks = tasks.filter((task) => !task.archived);
+                const archivedTasks = tasks.filter((task) => task.archived);
+
+                // Sort non-archived tasks by priority: high, normal, low
+                const sortedNonArchivedTasks = nonArchivedTasks.sort((a, b) => {
                     const priorityOrder = { high: 1, normal: 2, low: 3 };
                     return (
                         priorityOrder[a.priority] - priorityOrder[b.priority]
                     );
                 });
+
+                // Concatenate sorted non-archived tasks with archived tasks (in any order)
+                const sortedTasks = [
+                    ...sortedNonArchivedTasks,
+                    ...archivedTasks,
+                ];
 
                 // Return a new object with tasks populated
                 return { ...account.toObject(), tasks: sortedTasks };
