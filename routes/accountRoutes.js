@@ -13,8 +13,6 @@ router
     .patch(accountController.updateAccount)
     .delete(accountController.deleteAccount); // delete tasks associated with the account as well
 
-router.route("/cron").get(accountController.getAccountCron);
-
 router.route("/:id/tasks").get(accountController.getTasksByAccount);
 
 module.exports = router;

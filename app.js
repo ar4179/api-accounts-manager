@@ -4,6 +4,7 @@ const compression = require("compression");
 const helmet = require("helmet");
 const accountRouter = require("./routes/accountRoutes");
 const taskRouter = require("./routes/taskRoutes");
+const cronRouter = require("./routes/cronRouter");
 
 const app = express();
 
@@ -34,5 +35,6 @@ app.use(compression());
 
 app.use("/api/v1/accounts", accountRouter);
 app.use("/api/v1/tasks", taskRouter);
+app.use("/api/v1/cron", cronRouter);
 
 module.exports = app;
